@@ -1,5 +1,7 @@
 package app.ativa_recife.di.modules
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +19,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,10 +28,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.ativa_recife.R
+import app.ativa_recife.activity.RegisterActivity
 import app.ativa_recife.di.components.ButtonCustomComponent
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Inter
@@ -44,6 +50,7 @@ fun LoginInputModule(modifier: Modifier = Modifier) {
     val uiColor = if (isSystemInDarkTheme()) Blue50 else Orange50
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    val activity = LocalContext.current as? Activity
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,6 +69,18 @@ fun LoginInputModule(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(10.dp))
                 SocialMediaLoginModule(icon = R.drawable.facebook, text = "Facebook" ) {}
 
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            TextButton(onClick = {
+                activity?.startActivity(
+                Intent(activity, RegisterActivity::class.java).setFlags(
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                )
+            ) }) {
+                Row {
+                    Text(text = "Don't have account? ", color = Color.White)
+                    Text(text = "Create now", fontWeight = FontWeight.ExtraBold, color = Color.White)
+                }
             }
         }
     }

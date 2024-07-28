@@ -3,4 +3,5 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="the_title_app">Ativa Recife\n</string>
     <string name="login">Login\n</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>
