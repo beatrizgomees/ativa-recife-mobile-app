@@ -34,6 +34,7 @@ import app.ativa_recife.di.modules.SocialMediaLoginModule
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.RobotoRegular
+import app.ativa_recife.ui.theme.Yellow20
 import app.ativa_recife.ui.theme.labelMediumBlack
 import com.github.beatrizgomees.weatherapp.components.InputTextCustom
 
@@ -124,7 +125,7 @@ private fun RegisterSection() {
                 .fillMaxWidth()
                 .padding(start = 25.dp, end = 25.dp),
             borderRadius = 20,
-            onClick = { /*TODO*/ }, label = "Register", style = labelMediumBlack
+            onClick = { /*TODO*/ }, label = "Register", style = labelMediumBlack, color = Yellow20
         )
 
         RegisterInputModule()
