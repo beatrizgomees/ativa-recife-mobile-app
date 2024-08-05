@@ -22,20 +22,23 @@ fun ButtonCustomComponent(
     onClick: () -> Unit, label: String,
     style: TextStyle,
     modifier: Modifier,
-    borderRadius: Int
+    borderRadius: Int,
+    color: Color
 ) {
 
 
     Button(onClick = { onClick() },
-
         modifier = modifier,
-        colors = ButtonDefaults.buttonColors(Yellow20),
+        colors = ButtonDefaults.buttonColors(color),
         shape = RoundedCornerShape(borderRadius),
 
 
     ) {
         Row {
-            Text(label, color = Color.Black, fontFamily = RobotoRegular, style = style)
+            Text(label,
+                color = Color.Black,
+                fontFamily = RobotoRegular,
+                style = style)
 
         }
     }

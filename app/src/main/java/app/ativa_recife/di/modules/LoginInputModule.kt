@@ -34,7 +34,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.ativa_recife.R
+import app.ativa_recife.activity.HomeActivity
 import app.ativa_recife.activity.RegisterActivity
+import app.ativa_recife.activity.ui.theme.yellowPastel
 import app.ativa_recife.di.components.ButtonCustomComponent
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Inter
@@ -90,6 +92,7 @@ fun LoginInputModule(modifier: Modifier = Modifier) {
 private fun LoginSection(email: String, password: String) {
     var email1 = email
     var password1 = password
+    val activity = LocalContext.current as? Activity
     InputTextCustom(
         style = labelMediumBlack,
         modifier = Modifier
@@ -116,7 +119,13 @@ private fun LoginSection(email: String, password: String) {
             .fillMaxWidth()
             .padding(start = 25.dp, end = 25.dp),
         borderRadius = 20,
-        onClick = { /*TODO*/ }, label = "Log in", style = labelMediumBlack
+        onClick = {
+            activity?.startActivity(
+                Intent(activity, HomeActivity::class.java).setFlags(
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                )
+            )
+        }, label = "Log in", style = labelMediumBlack, color = yellowPastel
 
     )
 
