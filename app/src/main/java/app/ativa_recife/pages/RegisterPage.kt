@@ -127,7 +127,6 @@ private fun RegisterSection() {
             borderRadius = 20,
             onClick = { /*TODO*/ }, label = "Register", style = labelMediumBlack, color = Yellow20
         )
-
         RegisterInputModule()
 
 

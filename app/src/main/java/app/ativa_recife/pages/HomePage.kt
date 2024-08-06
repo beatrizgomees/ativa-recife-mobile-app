@@ -40,6 +40,7 @@ import app.ativa_recife.activity.ui.theme.yellowPastel
 import app.ativa_recife.di.components.CardComponent
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Orange50
+import app.ativa_recife.di.components.PhotoUser
 
 @Preview(showBackground = true)
 @Composable
@@ -52,20 +53,7 @@ fun HomePage(modifier: Modifier = Modifier) {
                 top = 10.dp, end = 10.dp
             )) {
             LocalizationTopBar()
-            Image(
-                painter = painterResource(id = R.drawable.woman),
-                contentDescription = "Dog",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .graphicsLayer {
-                        this.shape = RoundedCornerShape(20.dp)
-                        this.clip = true
-                        this.ambientShadowColor = Color.Black
-                        this.spotShadowColor = Color.Black
-                    }
-                    .size(50.dp)
-
-            )
+            PhotoUser()
         }
 
 
@@ -86,19 +74,21 @@ fun HomePage(modifier: Modifier = Modifier) {
 
 }
 
+
+
 @Composable
 private fun ContentCardsHomePage() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .clip(shape = RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp))
-            .padding(top = 50.dp, start = 20.dp, end = 20.dp),
+            .padding(top = 10.dp, start = 20.dp, end = 20.dp),
         verticalArrangement = Arrangement.Top
     ) {
 
         val list = (0..40).map { it.toString() }
         items(count = list.size) {
-            CardComponent()
+            CardComponent(registration = true)
             Spacer(modifier = Modifier.padding(15.dp))
         }
 

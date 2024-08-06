@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -24,13 +25,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.activity.HomeActivity
 import app.ativa_recife.activity.ui.theme.bluePastel
+import app.ativa_recife.activity.ui.theme.greenPastel
 import app.ativa_recife.activity.ui.theme.yellowPastel
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Yellow20
 import app.ativa_recife.ui.theme.labelMediumBlack
 
 @Composable
-fun CardComponent(modifier: Modifier = Modifier) {
+fun CardComponent(modifier: Modifier = Modifier, registration: Boolean ) {
+
     val activity = LocalContext.current as? Activity
     val uiColor = if (isSystemInDarkTheme())  yellowPastel else bluePastel
     val uiColorText = if (isSystemInDarkTheme())  Color.Black else Color.Black
@@ -79,10 +82,12 @@ fun CardComponent(modifier: Modifier = Modifier) {
                     fontSize = 15.sp,
                     color = uiColorText
                 ))
+
+                if(registration){
                 ButtonCustomComponent(
                     modifier = Modifier
-                        .size(200.dp)
-                        .padding(start = 25.dp, end = 10.dp, bottom = 10.dp),
+                        .width(200.dp).height(50.dp)
+                        .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
                     borderRadius = 20,
                     onClick = {
                         activity?.startActivity(
@@ -90,12 +95,31 @@ fun CardComponent(modifier: Modifier = Modifier) {
                                 Intent.FLAG_ACTIVITY_SINGLE_TOP
                             )
                         )
-                    }, label = "Log in",
+                    }, label = "Inscreva-se",
                     style = labelMediumBlack,
                     color = Color.White,
 
                 )
-            }
+            }else{
+                    ButtonCustomComponent(
+                        modifier = Modifier
+                            .width(200.dp).height(50.dp)
+                            .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+                        borderRadius = 20,
+                        onClick = {
+                            activity?.startActivity(
+                                Intent(activity, HomeActivity::class.java).setFlags(
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                                )
+                            )
+                        }, label = "Inscrito",
+                        style = labelMediumBlack,
+                        color = greenPastel,
+
+
+                        )
+                }
+                }
 
         }
     }
