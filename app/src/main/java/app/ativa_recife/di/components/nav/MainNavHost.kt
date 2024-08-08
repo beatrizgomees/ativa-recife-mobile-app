@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import app.ativa_recife.pages.EventRegistrationPage
 import app.ativa_recife.pages.HomePage
+import app.ativa_recife.pages.SearchPage
 import app.ativa_recife.viewmodel.MainViewModel
 
 @Composable
@@ -19,7 +20,7 @@ fun MainNavHost(navController: NavHostController, viewModel: MainViewModel) {
             EventRegistrationPage()
         }
         composable(route = BottomNavItem.SearchEvent.route){
-
+            SearchPage()
         }
         composable(route = BottomNavItem.FavoritesPage.route){
 
