@@ -100,7 +100,7 @@ private fun RegisterSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            label = "Password", onValueChange = { password = it }, value = password
+            label = "Password", onValueChange = { password = it }, value = password, isPassword = true
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
         InputTextCustom(
@@ -108,7 +108,7 @@ private fun RegisterSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            label = "Confirm Password", onValueChange = { confirmPassword = it }, value = confirmPassword
+            label = "Confirm Password", onValueChange = { confirmPassword = it }, value = confirmPassword, isPassword = true
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
         Spacer(modifier = Modifier.padding(top = 50.dp))
