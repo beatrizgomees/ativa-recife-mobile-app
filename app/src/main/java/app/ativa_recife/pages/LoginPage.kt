@@ -37,14 +37,9 @@ fun LoginPage(modifier: Modifier = Modifier) {
     val uiColor = if (isSystemInDarkTheme())  Blue50 else Orange50
     Surface( modifier = Modifier.fillMaxSize(), color = uiColor) {
         Column(modifier = Modifier.fillMaxSize()) {
-
             TopSection()
             Spacer(modifier = Modifier.height(36.dp))
             LoginInputModule()
-
-
-
-
         }
     }
 }

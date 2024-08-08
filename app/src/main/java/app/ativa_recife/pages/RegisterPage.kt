@@ -36,7 +36,7 @@ import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.RobotoRegular
 import app.ativa_recife.ui.theme.Yellow20
 import app.ativa_recife.ui.theme.labelMediumBlack
-import com.github.beatrizgomees.weatherapp.components.InputTextCustom
+import app.ativa_recife.di.components.InputTextCustom
 
 @Composable
 fun RegisterPage(modifier: Modifier = Modifier) {

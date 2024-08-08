@@ -1,17 +1,14 @@
-package com.github.beatrizgomees.weatherapp.components
+package app.ativa_recife.di.components
 
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -42,11 +39,7 @@ fun InputTextCustom(label: String,
                     unfocusedContainerColor = MaterialTheme.colorScheme.textFieldContainer,
                     focusedContainerColor = MaterialTheme.colorScheme.textFieldContainer
                 ),
-
                 visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
-
             )
-
         }
-
 }
