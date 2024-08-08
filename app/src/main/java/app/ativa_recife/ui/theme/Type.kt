@@ -61,3 +61,10 @@ val labelMediumBlack = TextStyle(
     color = Color.Black
 )
 
+val configButton = TextStyle(
+    fontFamily = RobotoRegular,
+    fontWeight = FontWeight.Normal,
+    fontSize = 20.sp,
+    color = Color.White //? não funcionando?
+)
+
