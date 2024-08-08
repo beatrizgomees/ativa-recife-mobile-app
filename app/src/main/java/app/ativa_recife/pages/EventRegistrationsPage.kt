@@ -1,7 +1,9 @@
 package app.ativa_recife.pages
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.view.Surface
+import android.widget.Toast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +65,7 @@ fun EventRegistrationPage(modifier: Modifier = Modifier) {
 
 @Composable
 private fun ContentCardsEventsRegistration() {
+    val activity = LocalContext.current as? Activity
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +76,7 @@ private fun ContentCardsEventsRegistration() {
 
         val list = (0..40).map { it.toString() }
         items(count = list.size) {
-            CardComponent(registration = false)
+            CardComponent(registration = false, buttonLabel = "Desinscrever-se", onClick = {Toast.makeText(activity, "Inscrição removida", Toast.LENGTH_SHORT).show()} )
             Spacer(modifier = Modifier.padding(15.dp))
         }
 

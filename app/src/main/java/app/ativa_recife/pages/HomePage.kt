@@ -1,5 +1,7 @@
 package app.ativa_recife.pages
 
+import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -23,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,6 +71,7 @@ fun HomePage(modifier: Modifier = Modifier) {
 
 @Composable
 private fun ContentCardsHomePage() {
+    val activity = LocalContext.current as? Activity
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +82,7 @@ private fun ContentCardsHomePage() {
 
         val list = (0..40).map { it.toString() }
         items(count = list.size) {
-            CardComponent(registration = true)
+            CardComponent(registration = true, buttonLabel = "Inscreva-se", onClick = { Toast.makeText(activity, "Inscrição realizada com sucesso", Toast.LENGTH_SHORT).show()} )
             Spacer(modifier = Modifier.padding(15.dp))
         }
 
