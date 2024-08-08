@@ -13,6 +13,5 @@ sealed  class BottomNavItem(var title: String, var icon: ImageVector, var route:
     object HomePage : BottomNavItem("Inicio", Icons.Default.Home, "home")
     object EventRegistrationPage : BottomNavItem("Inscrições", Icons.Default.DateRange, "eventRegistration")
     object SearchEvent : BottomNavItem("Eventos", Icons.Default.Search, "search")
-    object FavoritesPage : BottomNavItem("Favoritos", Icons.Default.Favorite, "favorite")
     object SettingsPage : BottomNavItem("settings", Icons.Default.Settings, "settings")
 }

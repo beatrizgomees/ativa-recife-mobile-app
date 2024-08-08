@@ -22,9 +22,6 @@ fun MainNavHost(navController: NavHostController, viewModel: MainViewModel) {
         composable(route = BottomNavItem.SearchEvent.route){
             SearchPage()
         }
-        composable(route = BottomNavItem.FavoritesPage.route){
-
-        }
         composable(route = BottomNavItem.SettingsPage.route){
 
         }

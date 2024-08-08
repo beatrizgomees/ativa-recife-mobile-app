@@ -19,7 +19,6 @@ fun BottomNavBar(navController: NavHostController) {
         BottomNavItem.HomePage,
         BottomNavItem.EventRegistrationPage,
         BottomNavItem.SearchEvent,
-        BottomNavItem.FavoritesPage,
         BottomNavItem.SettingsPage
     )
 
