@@ -1,6 +1,7 @@
 package app.ativa_recife.pages
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -47,9 +48,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
             RegisterSection()
 
         }
-
-}
-
+    }
 }
 
 @Composable
@@ -68,71 +67,70 @@ private fun TopSection() {
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp
         )
-
-
     }
 }
 
 @Composable
 private fun RegisterSection() {
+    var name by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
 
     Column(modifier = Modifier.padding(top = 10.dp)) {
         InputTextCustom(
-            style = labelMediumBlack,
+            style = labelMediumBlack, borderRadius = 20,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            borderRadius = 20,
-            label = "Name", onValueChange = { email = it }, value = email
+            label = "Name", onValueChange = { name = it }, value = name
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-
         InputTextCustom(
-            style = labelMediumBlack,
+            style = labelMediumBlack, borderRadius = 20,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            borderRadius = 20,
             label = "Email", onValueChange = { email = it }, value = email
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-
         InputTextCustom(
-            style = labelMediumBlack,
+            style = labelMediumBlack, borderRadius = 20,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            borderRadius = 20,
             label = "Password", onValueChange = { password = it }, value = password
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-
         InputTextCustom(
-            style = labelMediumBlack,
+            style = labelMediumBlack, borderRadius = 20,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp),
-            borderRadius = 20,
-            label = "Confirm Password", onValueChange = { email = it }, value = email
+            label = "Confirm Password", onValueChange = { confirmPassword = it }, value = confirmPassword
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-
+        Spacer(modifier = Modifier.padding(top = 50.dp))
         ButtonCustomComponent(
+            style = labelMediumBlack, color = Yellow20,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 25.dp, end = 25.dp),
             borderRadius = 20,
-            onClick = { /*TODO*/ }, label = "Register", style = labelMediumBlack, color = Yellow20
+            enabled = email.isNotEmpty() && name.isNotEmpty() &&
+                    password.isNotEmpty() && confirmPassword.isNotEmpty()
+                    && password.equals(confirmPassword),
+            label = "Register",
+            onClick = {
+                Toast.makeText(activity, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG)
+                .show()
+                activity?.finish()
+            }
         )
         RegisterInputModule()
-
-
     }
 }
-
 @Composable
 private fun RegisterInputModule() {
     Spacer(modifier = Modifier.height(30.dp))
