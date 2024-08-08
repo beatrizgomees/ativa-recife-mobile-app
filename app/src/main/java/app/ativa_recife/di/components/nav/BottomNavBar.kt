@@ -30,18 +30,21 @@ fun BottomNavBar(navController: NavHostController) {
         items.forEach{ item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
-                onClick = { navController.navigate(item.route){
-                    navController.graph.startDestinationRoute?.let {
-                        popUpTo(it)
-                    }
-                    launchSingleTop = true
-                }
-
-
-                },
                 icon = {Icon(imageVector = item.icon, contentDescription = item.title)},
                 label = {Text(text = item.title, fontSize = 12.sp)},
-                alwaysShowLabel = true
+                alwaysShowLabel = true,
+                onClick = {
+                    navController.navigate(item.route) {
+                        // Volta pilha de navegação até HomePage (startDest).
+                        navController.graph.startDestinationRoute?.let {
+                            popUpTo(it) {
+                                saveState = true
+                            }
+                            restoreState = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
             )
         }
     }

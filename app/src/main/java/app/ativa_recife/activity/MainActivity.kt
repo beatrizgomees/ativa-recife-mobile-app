@@ -24,7 +24,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             AtivarecifeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                  LoginPage()
