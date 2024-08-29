@@ -20,11 +20,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.ativa_recife.di.components.ButtonCustomComponent
-import app.ativa_recife.di.components.PhotoUser
+import app.ativa_recife.utils.components.ButtonCustomComponent
+import app.ativa_recife.utils.components.PhotoUser
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.configButton
-import app.ativa_recife.ui.theme.labelMediumBlack
 
 @Composable
 fun SettingsPage(modifier: Modifier = Modifier) {

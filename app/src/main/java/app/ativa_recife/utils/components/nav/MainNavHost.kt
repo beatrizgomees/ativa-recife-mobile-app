@@ -1,4 +1,4 @@
-package app.ativa_recife.di.components.nav
+package app.ativa_recife.utils.components.nav
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

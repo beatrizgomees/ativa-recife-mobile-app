@@ -1,8 +1,7 @@
-package app.ativa_recife.di.components.nav
+package app.ativa_recife.utils.components.nav
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings

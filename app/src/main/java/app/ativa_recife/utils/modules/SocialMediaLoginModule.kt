@@ -1,4 +1,4 @@
-package app.ativa_recife.di.modules
+package app.ativa_recife.utils.modules
 
 import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes
@@ -10,7 +10,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import app.ativa_recife.R
 
 @Composable
 fun SocialMediaLoginModule(

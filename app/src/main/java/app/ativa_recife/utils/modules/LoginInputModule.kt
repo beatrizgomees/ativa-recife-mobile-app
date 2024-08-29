@@ -1,7 +1,9 @@
-package app.ativa_recife.di.modules
+package app.ativa_recife.utils.modules
 
 import android.app.Activity
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,11 +30,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.ativa_recife.R
 import app.ativa_recife.activity.HomeActivity
+import app.ativa_recife.activity.MainActivity
 import app.ativa_recife.activity.RegisterActivity
 import app.ativa_recife.activity.ui.theme.yellowPastel
-import app.ativa_recife.di.components.ButtonCustomComponent
-import app.ativa_recife.di.components.InputTextCustom
+import app.ativa_recife.utils.components.ButtonCustomComponent
+import app.ativa_recife.utils.components.InputTextCustom
 import app.ativa_recife.ui.theme.labelMediumBlack
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @Composable
 fun LoginInputModule(modifier: Modifier = Modifier) {
@@ -102,14 +107,25 @@ private fun LoginSection(activity: Activity) {
             .fillMaxWidth()
             .padding(start = 25.dp, end = 25.dp),
         onClick = {
-            activity?.startActivity(
-                Intent(activity, HomeActivity::class.java).setFlags(
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP
-                )
-            )
+            LoginActionFirebase(email = email, password = password, activity = activity)
         },
         label = "Log in", enabled = email.isNotEmpty() && password.isNotEmpty()
     )
 }
 
+private fun LoginActionFirebase(email: String, password: String, activity: Activity?){
+    Firebase.auth.signInWithEmailAndPassword(email, password)
+        .addOnCompleteListener(activity!!) { task ->
+            if (task.isSuccessful) {
+                activity.startActivity(
+                    Intent(activity, HomeActivity::class.java).setFlags(
+                        FLAG_ACTIVITY_SINGLE_TOP
+                    )
+                )
+                Toast.makeText(activity, "Login OK!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(activity, "Login FALHOU!", Toast.LENGTH_LONG).show()
+            }
+        }
+}
 

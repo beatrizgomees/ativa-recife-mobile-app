@@ -1,4 +1,4 @@
-package app.ativa_recife.di.components
+package app.ativa_recife.utils.components
 
 
 import androidx.compose.foundation.layout.Column

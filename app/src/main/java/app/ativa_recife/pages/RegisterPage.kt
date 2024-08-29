@@ -30,14 +30,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.R
-import app.ativa_recife.di.components.ButtonCustomComponent
-import app.ativa_recife.di.modules.SocialMediaLoginModule
+import app.ativa_recife.utils.components.ButtonCustomComponent
+import app.ativa_recife.utils.modules.SocialMediaLoginModule
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.RobotoRegular
 import app.ativa_recife.ui.theme.Yellow20
 import app.ativa_recife.ui.theme.labelMediumBlack
-import app.ativa_recife.di.components.InputTextCustom
+import app.ativa_recife.utils.components.InputTextCustom
+import app.ativa_recife.viewmodel.RegisterViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @Composable
 fun RegisterPage(modifier: Modifier = Modifier) {
@@ -123,9 +126,7 @@ private fun RegisterSection() {
                     && password.equals(confirmPassword),
             label = "Register",
             onClick = {
-                Toast.makeText(activity, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG)
-                .show()
-                activity?.finish()
+               RegisterActionFirebase(email = email, password = password, activity = activity)
             }
         )
         RegisterInputModule()
@@ -155,3 +156,18 @@ private fun RegisterInputModule() {
     }
 
 }
+
+private fun RegisterActionFirebase(email: String, password: String, activity: Activity?){
+    Firebase.auth.createUserWithEmailAndPassword(email, password)
+        .addOnCompleteListener(activity!!) { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(activity,
+                    "Registro OK!", Toast.LENGTH_LONG).show()
+                activity.finish()
+            } else {
+                Toast.makeText(activity,
+                    "Registro FALHOU!", Toast.LENGTH_LONG).show()
+            }
+        }
+}
+

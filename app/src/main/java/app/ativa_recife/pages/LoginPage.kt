@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.R
-import app.ativa_recife.di.modules.LoginInputModule
+import app.ativa_recife.utils.modules.LoginInputModule
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.RobotoRegular
 import app.ativa_recife.ui.theme.Orange50
