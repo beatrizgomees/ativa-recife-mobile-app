@@ -1,6 +1,7 @@
 package app.ativa_recife.pages
 
 import android.app.Activity
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.ativa_recife.activity.CreateEventActivity
+import app.ativa_recife.activity.HomeActivity
 import app.ativa_recife.activity.ui.theme.Pink40
 import app.ativa_recife.utils.components.ButtonCustomComponent
 import app.ativa_recife.utils.components.PhotoUser
@@ -75,6 +78,26 @@ fun SettingsPage(modifier: Modifier = Modifier) {
         ButtonCustomComponent(
             onClick = { activity?.finish() },
             label = "Criar uma Organização",
+            style = configButton,
+            modifier = Modifier
+                .width(450.dp)
+                .height(50.dp)
+                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+            borderRadius = 20,
+            color = Pink40
+        )
+        Spacer(modifier = Modifier.size(20.dp))
+        ButtonCustomComponent(
+            onClick = {
+                if (activity != null) {
+                    activity.startActivity(
+                        Intent(activity, CreateEventActivity::class.java).setFlags(
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        )
+                    )
+                }
+            },
+            label = "Criar um Evento",
             style = configButton,
             modifier = Modifier
                 .width(450.dp)

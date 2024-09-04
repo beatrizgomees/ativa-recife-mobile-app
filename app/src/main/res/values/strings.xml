@@ -6,4 +6,5 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_home" />
     <string name="title_activity_organization_manager">OrganizationManagerActivity</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
 </resources>
