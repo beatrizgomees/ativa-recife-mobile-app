@@ -7,12 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import app.ativa_recife.model.Address
 import app.ativa_recife.model.User
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 class RegisterViewModel : ViewModel() {
-    private val _user = mutableStateOf (User("", "", ""))
-
 
 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.ativa_recife.activity.ui.theme.Pink40
 import app.ativa_recife.utils.components.ButtonCustomComponent
 import app.ativa_recife.utils.components.PhotoUser
 import app.ativa_recife.ui.theme.Orange50
@@ -44,50 +45,55 @@ fun SettingsPage(modifier: Modifier = Modifier) {
 
         )
         Spacer(modifier = Modifier.size(40.dp))
-        Box(
-            modifier = Modifier
-                .width(450.dp)
-                .height(300.dp)
-                .background(Orange50),
-            contentAlignment = Alignment.Center
-        ) {
-            PhotoUser(size = 250.dp)
-        }
-        Spacer(modifier = Modifier.size(40.dp))
+        PhotoUser(size = 100.dp)
+
+        Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(
             onClick = { Toast.makeText(activity, "Editando Perfil", Toast.LENGTH_SHORT).show() },
             label = "Editar Perfil",
             style = configButton,
             modifier = Modifier
                         .width(450.dp)
-                        .height(70.dp)
+                        .height(50.dp)
                         .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
             borderRadius = 20,
-            color = Color.Cyan
+            color = Pink40
         )
-        Spacer(modifier = Modifier.size(40.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(
             onClick = { Toast.makeText(activity, "Editando localização", Toast.LENGTH_SHORT).show() },
             label = "Editar localização",
             style = configButton,
             modifier = Modifier
                 .width(450.dp)
-                .height(70.dp)
+                .height(50.dp)
                 .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
             borderRadius = 20,
-            color = Color.Cyan
+            color = Pink40
         )
-        Spacer(modifier = Modifier.size(40.dp))
+        Spacer(modifier = Modifier.size(20.dp))
+        ButtonCustomComponent(
+            onClick = { activity?.finish() },
+            label = "Criar uma Organização",
+            style = configButton,
+            modifier = Modifier
+                .width(450.dp)
+                .height(50.dp)
+                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+            borderRadius = 20,
+            color = Pink40
+        )
+        Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(
             onClick = { activity?.finish() },
             label = "Sair",
             style = configButton,
             modifier = Modifier
                 .width(450.dp)
-                .height(70.dp)
+                .height(50.dp)
                 .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
             borderRadius = 20,
-            color = Color.Cyan
+            color = Pink40
         )
     }
 }
