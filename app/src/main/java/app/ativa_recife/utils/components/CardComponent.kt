@@ -21,10 +21,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.activity.ui.theme.bluePastel
 import app.ativa_recife.activity.ui.theme.yellowPastel
+import app.ativa_recife.model.Address
+import app.ativa_recife.model.User
 import app.ativa_recife.ui.theme.labelMediumBlack
+import java.util.Date
 
 @Composable
-fun CardComponent(modifier: Modifier = Modifier, registration: Boolean, buttonLabel : String, onClick: () -> Unit ) {
+fun CardComponent(
+    modifier: Modifier = Modifier,
+    registration: Boolean,
+    buttonLabel : String,
+    onClick: () -> Unit,
+    dateEvent: Date,
+    startTimeEvent: Date,
+    sizeRouteEvent: String,
+    managerEvent: User,
+    titleEvent: String,
+    addressEvent : Address
+) {
 
     val uiColor = if (isSystemInDarkTheme())  yellowPastel else bluePastel
     val uiColorText = if (isSystemInDarkTheme())  Color.Black else Color.Black
@@ -36,46 +50,38 @@ fun CardComponent(modifier: Modifier = Modifier, registration: Boolean, buttonLa
 
         ) {
         Column(modifier = Modifier.padding(start = 10.dp, top = 10.dp)) {
-            Text(text = "AUTISMO RUN", style = TextStyle(
+            Text(text = titleEvent, style = TextStyle(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 20.sp,
                 color = uiColorText
             ))
-            Text(text = "Data: 07/04/2024", style = TextStyle(
+            Text(text = dateEvent.toString(), style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 color = uiColorText
             ))
-            Text(text = "Local: 2º Jardim de Boa Viagem", style = TextStyle(
+            Text(text = addressEvent.street + " " + addressEvent.district + " " + addressEvent.number + " " + addressEvent.city + " " + addressEvent.state, style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 color = uiColorText
             ))
-            Text(text = "Largada: 7:00h.", style = TextStyle(
+            Text(text = startTimeEvent.toString(), style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 color = uiColorText
             ))
-            Text(text = "Percurso: 5 km", style = TextStyle(
+            Text(text = "Tamanho do percurso:" + sizeRouteEvent, style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 color = uiColorText
             ))
-            Text(text = "Caminhada  2km", style = TextStyle(
-                fontWeight = FontWeight.Normal,
-                fontSize = 15.sp,
-                color = uiColorText
-            ))
-
             Row(horizontalArrangement = Arrangement.End) {
-                Text(text = "Organizador: ACOPE ", style = TextStyle(
+                Text(text = "Organizador: " + managerEvent.name, style = TextStyle(
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
                     color = uiColorText
                 ))
-
-
-                }
+            }
 
         }
         Column(

@@ -74,7 +74,7 @@ private fun ContentCardsEventsRegistration() {
 
         val list = (0..40).map { it.toString() }
         items(count = list.size) {
-            CardComponent(registration = false, buttonLabel = "Desinscrever-se", onClick = {Toast.makeText(activity, "Inscrição removida", Toast.LENGTH_SHORT).show()} )
+//            CardComponent(registration = false, buttonLabel = "Desinscrever-se", onClick = {Toast.makeText(activity, "Inscrição removida", Toast.LENGTH_SHORT).show()} )
             Spacer(modifier = Modifier.padding(15.dp))
         }
 

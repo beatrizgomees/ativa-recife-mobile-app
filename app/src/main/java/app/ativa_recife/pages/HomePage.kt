@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,14 +34,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.R
+import app.ativa_recife.db.fb.FBDatabase
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.utils.components.CardComponent
 import app.ativa_recife.utils.components.PhotoUser
+import app.ativa_recife.viewmodel.MainViewModel
 
 @Preview(showBackground = true)
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
+fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase: FBDatabase) {
     val uiColor = if (isSystemInDarkTheme())  Blue50 else Color.White
     Surface( modifier = Modifier.fillMaxSize(), color = uiColor) {
         Row(
@@ -47,7 +51,7 @@ fun HomePage(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(
                 top = 10.dp, end = 10.dp
             )) {
-            LocalizationTopBar()
+            LocalizationTopBar(viewModel)
             PhotoUser()
         }
 
@@ -58,7 +62,7 @@ fun HomePage(modifier: Modifier = Modifier) {
         ) {
 
             Text(text = "Próximos eventos perto de você", modifier = Modifier.padding(top = 30.dp))
-            ContentCardsHomePage()
+            ContentCardsHomePage(viewModel)
         }
 
 
@@ -70,8 +74,9 @@ fun HomePage(modifier: Modifier = Modifier) {
 
 
 @Composable
-private fun ContentCardsHomePage() {
+private fun ContentCardsHomePage(viewModel: MainViewModel) {
     val activity = LocalContext.current as? Activity
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -79,18 +84,29 @@ private fun ContentCardsHomePage() {
             .padding(top = 10.dp, start = 20.dp, end = 20.dp),
         verticalArrangement = Arrangement.Top
     ) {
+        val list = viewModel.events
 
-        val list = (0..40).map { it.toString() }
-        items(count = list.size) {
-            CardComponent(registration = true, buttonLabel = "Inscreva-se", onClick = { Toast.makeText(activity, "Inscrição realizada com sucesso", Toast.LENGTH_SHORT).show()} )
-            Spacer(modifier = Modifier.padding(15.dp))
+        items(list) { event ->
+            CardComponent(
+                registration = true,
+                buttonLabel = "Inscreva-se",
+                onClick = {
+                    Toast.makeText(activity,"Inscrição realizada com sucesso", Toast.LENGTH_SHORT).show()
+                },
+                dateEvent = event.data,
+                startTimeEvent = event.startTime ,
+                sizeRouteEvent = event.sizeRoute,
+                managerEvent = event.manager,
+                titleEvent = event.title,
+                addressEvent = event.address
+            )
+            Spacer(modifier = Modifier.height(15.dp)) // Use height em vez de padding para espaçamento
         }
-
     }
 }
 
 @Composable
-fun LocalizationTopBar(){
+fun LocalizationTopBar(viewModel: MainViewModel){
     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.padding(top = 10.dp, end = 10.dp)) {
         Row(
             horizontalArrangement = Arrangement.Start,
@@ -113,7 +129,7 @@ fun LocalizationTopBar(){
 
                 Text(
                     modifier = Modifier.align(Alignment.Center),
-                    text = "Recife - PE",
+                    text = "Recife-PE",
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp
                 )

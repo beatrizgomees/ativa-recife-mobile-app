@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -30,6 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.R
+import app.ativa_recife.db.fb.FBDatabase
+import app.ativa_recife.model.User
 import app.ativa_recife.utils.components.ButtonCustomComponent
 import app.ativa_recife.utils.modules.SocialMediaLoginModule
 import app.ativa_recife.ui.theme.Blue50
@@ -80,6 +83,7 @@ private fun RegisterSection() {
     var password by rememberSaveable { mutableStateOf("") }
     var confirmPassword by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
+    val fbDB = remember { FBDatabase() }
 
     Column(modifier = Modifier.padding(top = 10.dp)) {
         InputTextCustom(
@@ -126,7 +130,7 @@ private fun RegisterSection() {
                     && password.equals(confirmPassword),
             label = "Register",
             onClick = {
-               RegisterActionFirebase(email = email, password = password, activity = activity)
+               RegisterActionFirebase(email = email, password = password, name = name, activity = activity, fbDatabase = fbDB)
             }
         )
         RegisterInputModule()
@@ -157,10 +161,13 @@ private fun RegisterInputModule() {
 
 }
 
-private fun RegisterActionFirebase(email: String, password: String, activity: Activity?){
+private fun RegisterActionFirebase(email: String, password: String, name: String, activity: Activity?, fbDatabase: FBDatabase){
+
+
     Firebase.auth.createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener(activity!!) { task ->
             if (task.isSuccessful) {
+                fbDatabase.register(User(name = name))
                 Toast.makeText(activity,
                     "Registro OK!", Toast.LENGTH_LONG).show()
                     activity.finish()

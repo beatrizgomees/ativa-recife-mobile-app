@@ -10,16 +10,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import app.ativa_recife.db.fb.FBDatabase
 import app.ativa_recife.ui.theme.AtivarecifeTheme
 import app.ativa_recife.utils.components.nav.BottomNavBar
 import app.ativa_recife.utils.components.nav.MainNavHost
 import app.ativa_recife.viewmodel.MainViewModel
 
 class HomeActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,12 +34,11 @@ class HomeActivity : ComponentActivity() {
             val context = LocalContext.current
             val launcher = rememberLauncherForActivityResult(contract =
             ActivityResultContracts.RequestPermission(), onResult = {})
-
             val viewModel : MainViewModel by viewModels()
-
             if (!viewModel.loggedIn) {
                 this.finish()
             }
+            val fbDB = remember { FBDatabase (viewModel) }
             AtivarecifeTheme {
                 Scaffold(
                     bottomBar = {
@@ -43,7 +48,7 @@ class HomeActivity : ComponentActivity() {
                     ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                        MainNavHost(navController = navController, viewModel, context)
+                        MainNavHost(navController = navController, viewModel, context, fbDB)
                     }
                 }
             }
