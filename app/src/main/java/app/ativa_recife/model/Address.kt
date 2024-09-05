@@ -3,10 +3,10 @@ package app.ativa_recife.model
 data class Address (
 
     var street: String,
-    var neighborhood: String,
+    var district : String,
     var number: Int,
     var city: String,
-    var cep: String
+    var state: String
 
 
 )
