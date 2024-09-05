@@ -31,6 +31,9 @@ class HomeActivity : ComponentActivity() {
 
             val viewModel : MainViewModel by viewModels()
 
+            if (!viewModel.loggedIn) {
+                this.finish()
+            }
             AtivarecifeTheme {
                 Scaffold(
                     bottomBar = {

@@ -25,11 +25,13 @@ import app.ativa_recife.utils.components.ButtonCustomComponent
 import app.ativa_recife.utils.components.PhotoUser
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.configButton
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+
 
 @Composable
 fun SettingsPage(modifier: Modifier = Modifier) {
     val activity = LocalContext.current as? Activity
-
 
     Column(
         modifier = Modifier
@@ -73,7 +75,7 @@ fun SettingsPage(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(
-            onClick = { activity?.finish() },
+            onClick = {},
             label = "Criar uma Organização",
             style = configButton,
             modifier = Modifier
@@ -85,7 +87,7 @@ fun SettingsPage(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(
-            onClick = { activity?.finish() },
+            onClick = {  Firebase.auth.signOut() },
             label = "Sair",
             style = configButton,
             modifier = Modifier

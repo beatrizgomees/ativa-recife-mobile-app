@@ -30,7 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.ativa_recife.R
 import app.ativa_recife.activity.HomeActivity
-import app.ativa_recife.activity.MainActivity
 import app.ativa_recife.activity.RegisterActivity
 import app.ativa_recife.activity.ui.theme.yellowPastel
 import app.ativa_recife.utils.components.ButtonCustomComponent
@@ -117,11 +116,11 @@ private fun LoginActionFirebase(email: String, password: String, activity: Activ
     Firebase.auth.signInWithEmailAndPassword(email, password)
         .addOnCompleteListener(activity!!) { task ->
             if (task.isSuccessful) {
-                activity.startActivity(
-                    Intent(activity, HomeActivity::class.java).setFlags(
-                        FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
+//                activity.startActivity(
+//                    Intent(activity, HomeActivity::class.java).setFlags(
+//                        FLAG_ACTIVITY_SINGLE_TOP
+//                    )
+//                )
                 Toast.makeText(activity, "Login OK!", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(activity, "Login FALHOU!", Toast.LENGTH_LONG).show()
