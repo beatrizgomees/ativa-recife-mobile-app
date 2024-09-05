@@ -1,5 +1,6 @@
 package app.ativa_recife.utils.components.nav
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,7 +12,7 @@ import app.ativa_recife.pages.SettingsPage
 import app.ativa_recife.viewmodel.MainViewModel
 
 @Composable
-fun MainNavHost(navController: NavHostController, viewModel: MainViewModel) {
+fun MainNavHost(navController: NavHostController, viewModel: MainViewModel, context: Context) {
 
     NavHost(navController, startDestination = BottomNavItem.HomePage.route ){
         composable(route = BottomNavItem.HomePage.route){
@@ -21,7 +22,7 @@ fun MainNavHost(navController: NavHostController, viewModel: MainViewModel) {
             EventRegistrationPage()
         }
         composable(route = BottomNavItem.SearchEvent.route){
-            SearchPage()
+            SearchPage(viewModel = viewModel, context = context)
         }
         composable(route = BottomNavItem.SettingsPage.route){
             SettingsPage()

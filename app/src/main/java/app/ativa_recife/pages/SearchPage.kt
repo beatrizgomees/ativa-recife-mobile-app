@@ -1,14 +1,15 @@
 package app.ativa_recife.pages
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -22,33 +23,45 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.focusedTextFiled
 import app.ativa_recife.ui.theme.labelMediumBlack
 import app.ativa_recife.ui.theme.textFieldContainer
 import app.ativa_recife.ui.theme.unfocusedTextField
+import app.ativa_recife.viewmodel.MainViewModel
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun SearchPage(modifier: Modifier = Modifier) {
+fun SearchPage(modifier: Modifier = Modifier,
+               viewModel: MainViewModel,
+               context: Context
+) {
     var search by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
-
+    val camPosState = rememberCameraPositionState ()
+    val hasLocationPermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED
+        )
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Orange50)
-            .padding(top = 20.dp, start = 20.dp, end = 20.dp),
+            .background(Orange50),
         horizontalAlignment = Alignment.CenterHorizontally
         
     ) {
@@ -79,14 +92,11 @@ fun SearchPage(modifier: Modifier = Modifier) {
             },
             onValueChange = {search = it},
             )
-        Spacer(modifier = Modifier.size(410.dp))
-        Text(
-            text = "Mapa",
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp
-        )
+        GoogleMap (
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = camPosState,
+            properties = MapProperties(isMyLocationEnabled = hasLocationPermission),
+            uiSettings = MapUiSettings(myLocationButtonEnabled = true)
+        ) {}
     }
 }

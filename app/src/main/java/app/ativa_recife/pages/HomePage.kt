@@ -32,10 +32,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.ativa_recife.R
-import app.ativa_recife.utils.components.CardComponent
-import app.ativa_recife.utils.components.PhotoUser
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.ui.theme.Orange50
+import app.ativa_recife.utils.components.CardComponent
+import app.ativa_recife.utils.components.PhotoUser
 
 @Preview(showBackground = true)
 @Composable

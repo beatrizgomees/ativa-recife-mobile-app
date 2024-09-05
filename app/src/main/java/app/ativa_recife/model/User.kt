@@ -5,5 +5,4 @@ data class User (
     var address: Address,
     var registredEvents: List<Event>,
     var publicizedEvents: List<Event>
-
 )
