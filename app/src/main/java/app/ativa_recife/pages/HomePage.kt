@@ -71,8 +71,6 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
 
 }
 
-
-
 @Composable
 private fun ContentCardsHomePage(viewModel: MainViewModel) {
     val activity = LocalContext.current as? Activity

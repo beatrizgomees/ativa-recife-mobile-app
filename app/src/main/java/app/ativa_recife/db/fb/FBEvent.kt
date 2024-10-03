@@ -31,7 +31,8 @@ data class FBEvent(
         managerRegistredEvents = event.manager.registredEvents?.map { FBEvent(it) } ?: emptyList(), // Usa os eventos registrados do gerente
         managerPublicizedEvents = event.manager.publicizedEvents?.map { FBEvent(it) } ?: emptyList(), // Usa os eventos publicizados do gerente
         sizeRoute = event.sizeRoute,
-        startingLocation = FBLatLng(event.startingLocation)
+        startingLocation = FBLatLng(event.startingLocation),
+        title = event.title
     )
 
     // Método para converter FBEvent de volta para Event
@@ -53,9 +54,6 @@ data class FBEvent(
         )
     }
 }
-
-
-
 
 // Classe LatLng para Firestore
 data class FBLatLng(

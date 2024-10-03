@@ -29,4 +29,8 @@ class MainViewModel : ViewModelBase(), FBDatabase.Listener{
         _events.addAll(events)
     }
 
+    override fun onEventCreated(event: Event) {
+        _events.add(event)
+    }
+
 }
