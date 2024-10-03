@@ -20,7 +20,7 @@ fun MainNavHost(navController: NavHostController, viewModel: MainViewModel, cont
             HomePage(viewModel = viewModel, fbDatabase = fbDatabase)
         }
         composable(route = BottomNavItem.EventRegistrationPage.route){
-            EventRegistrationPage()
+            EventRegistrationPage(viewModel = viewModel, fbDatabase = fbDatabase)
         }
         composable(route = BottomNavItem.SearchEvent.route){
             SearchPage(viewModel = viewModel, context = context)

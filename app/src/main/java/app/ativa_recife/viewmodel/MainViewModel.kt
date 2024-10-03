@@ -1,36 +1,59 @@
 package app.ativa_recife.viewmodel
 
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import app.ativa_recife.db.fb.FBDatabase
-import app.ativa_recife.model.Address
 import app.ativa_recife.model.Event
 import app.ativa_recife.model.User
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class MainViewModel : ViewModelBase(), FBDatabase.Listener{
-    private val _events = mutableStateListOf<Event>()
-    val events : List<Event>
-        get() = _events
+    private val _eventsNear = mutableStateListOf<Event>()
+    val eventsNear : List<Event>
+        get() = _eventsNear
 
     private val _user = mutableStateOf (User(name = ""))
     val user : User
         get() = _user.value
+
+    private val _eventsSubscribed = mutableStateListOf<Event>()
+    val eventsSubscribed : List<Event>
+        get() = _eventsSubscribed
 
     override fun onUserLoaded(user: User) {
         _user.value = user
     }
 
     override fun onEventsLoaded(events: List<Event>) {
-        _events.addAll(events)
+        _eventsNear.addAll(events)
+    }
+
+    override fun onEventSubscribed(event: Event) {
+        _eventsSubscribed.add(event)
+        filterEventsSubscribed()
     }
 
     override fun onEventCreated(event: Event) {
-        _events.add(event)
+        _eventsNear.add(event)
+    }
+
+    override fun onEventUnsubscribed(event: Event) {
+        _eventsSubscribed.remove(event)
+        _eventsNear.add(event)
+    }
+
+    override fun onEventUpdated(event: Event) {
+        _eventsNear.remove(event)
+        _eventsNear.add(event)
+
+    }
+
+    fun filterEventsSubscribed() {
+        _eventsNear.removeAll { eventSubscribedOnNearList ->
+            _eventsSubscribed.any { eventSubscribed ->
+                eventSubscribed.id == eventSubscribedOnNearList.id
+            }
+        }
     }
 
 }

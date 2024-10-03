@@ -67,7 +67,7 @@ fun LoginInputModule(modifier: Modifier = Modifier) {
             TextButton(onClick = {
                 activity?.startActivity(
                 Intent(activity, RegisterActivity::class.java).setFlags(
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    FLAG_ACTIVITY_SINGLE_TOP
                 )
             ) }) {
                 Row {

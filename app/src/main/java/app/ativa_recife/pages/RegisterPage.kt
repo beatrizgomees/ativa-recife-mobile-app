@@ -161,9 +161,7 @@ private fun RegisterInputModule() {
 
 }
 
-private fun RegisterActionFirebase(email: String, password: String, name: String, activity: Activity?, fbDatabase: FBDatabase){
-
-
+private fun RegisterActionFirebase(email: String, password: String, name: String, activity: Activity?, fbDatabase: FBDatabase) {
     Firebase.auth.createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener(activity!!) { task ->
             if (task.isSuccessful) {

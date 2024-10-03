@@ -15,11 +15,11 @@ data class FBEvent(
     var startTime: Date = Date(),
     var managerName: String = "",
     var managerAddress: FBAddress = FBAddress(), // Adiciona endereço do gerente
-    var managerRegistredEvents: List<FBEvent> = emptyList(), // Adiciona eventos registrados do gerente
-    var managerPublicizedEvents: List<FBEvent> = emptyList(), // Adiciona eventos publicizados do gerente
     var sizeRoute: String = "",
     var startingLocation: FBLatLng = FBLatLng(),
-    var title: String = ""
+    var title: String = "",
+    var id : String = ""
+
 ) {
     // Construtor para converter Event para FBEvent
     constructor(event: Event) : this(
@@ -28,11 +28,10 @@ data class FBEvent(
         startTime = event.startTime,
         managerName = event.manager.name, // Usa o nome do gerente
         managerAddress = FBAddress(event.manager.address), // Usa o endereço do gerente
-        managerRegistredEvents = event.manager.registredEvents?.map { FBEvent(it) } ?: emptyList(), // Usa os eventos registrados do gerente
-        managerPublicizedEvents = event.manager.publicizedEvents?.map { FBEvent(it) } ?: emptyList(), // Usa os eventos publicizados do gerente
         sizeRoute = event.sizeRoute,
         startingLocation = FBLatLng(event.startingLocation),
-        title = event.title
+        title = event.title,
+        id = event.id
     )
 
     // Método para converter FBEvent de volta para Event
@@ -45,12 +44,11 @@ data class FBEvent(
             manager = User(
                 name = managerName,
                 address = managerAddress.toAddress(),
-                registredEvents = managerRegistredEvents.map { it.toEvent() },
-                publicizedEvents = managerPublicizedEvents.map { it.toEvent() }
             ),
             sizeRoute = sizeRoute,
             startingLocation = startingLocation.toLatLng(),
-            title = title
+            title = title,
+            id = id
         )
     }
 }

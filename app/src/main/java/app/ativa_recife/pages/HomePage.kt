@@ -62,7 +62,7 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
         ) {
 
             Text(text = "Próximos eventos perto de você", modifier = Modifier.padding(top = 30.dp))
-            ContentCardsHomePage(viewModel)
+            ContentCardsHomePage(viewModel, fbDatabase)
         }
 
 
@@ -72,7 +72,7 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
 }
 
 @Composable
-private fun ContentCardsHomePage(viewModel: MainViewModel) {
+private fun ContentCardsHomePage(viewModel: MainViewModel, fbDatabase: FBDatabase) {
     val activity = LocalContext.current as? Activity
 
     LazyColumn(
@@ -82,13 +82,14 @@ private fun ContentCardsHomePage(viewModel: MainViewModel) {
             .padding(top = 10.dp, start = 20.dp, end = 20.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        val list = viewModel.events
+        var list = viewModel.eventsNear
 
         items(list) { event ->
             CardComponent(
                 registration = true,
                 buttonLabel = "Inscreva-se",
                 onClick = {
+                    fbDatabase.subscribeEvent(event)
                     Toast.makeText(activity,"Inscrição realizada com sucesso", Toast.LENGTH_SHORT).show()
                 },
                 dateEvent = event.data,
@@ -98,7 +99,7 @@ private fun ContentCardsHomePage(viewModel: MainViewModel) {
                 titleEvent = event.title,
                 addressEvent = event.address
             )
-            Spacer(modifier = Modifier.height(15.dp)) // Use height em vez de padding para espaçamento
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }

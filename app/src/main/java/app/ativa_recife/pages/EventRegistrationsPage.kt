@@ -24,14 +24,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import app.ativa_recife.db.fb.FBDatabase
 import app.ativa_recife.ui.theme.Blue50
 import app.ativa_recife.utils.components.CardComponent
 import app.ativa_recife.utils.components.PhotoUser
+import app.ativa_recife.viewmodel.MainViewModel
+import androidx.compose.foundation.lazy.items
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true)
 @Composable
-fun EventRegistrationPage(modifier: Modifier = Modifier) {
+fun EventRegistrationPage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase: FBDatabase) {
     val uiColor = if (isSystemInDarkTheme()) Blue50 else Color.White
     Scaffold(modifier = Modifier.fillMaxSize(), containerColor = uiColor) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -55,14 +60,14 @@ fun EventRegistrationPage(modifier: Modifier = Modifier) {
                 text = "Suas Inscrições",
                 fontSize = 20.sp,
             )
-            ContentCardsEventsRegistration()
+            ContentCardsEventsRegistration(viewModel, fbDatabase)
         }
     }
 
 }
 
 @Composable
-private fun ContentCardsEventsRegistration() {
+private fun ContentCardsEventsRegistration(viewModel: MainViewModel, fbDatabase: FBDatabase) {
     val activity = LocalContext.current as? Activity
     LazyColumn(
         modifier = Modifier
@@ -72,9 +77,23 @@ private fun ContentCardsEventsRegistration() {
         verticalArrangement = Arrangement.Top
     ) {
 
-        val list = (0..40).map { it.toString() }
-        items(count = list.size) {
-//            CardComponent(registration = false, buttonLabel = "Desinscrever-se", onClick = {Toast.makeText(activity, "Inscrição removida", Toast.LENGTH_SHORT).show()} )
+        val list = viewModel.eventsSubscribed
+
+        items(list) { event ->
+            CardComponent(
+                registration = true,
+                buttonLabel = "Desinscrever-se",
+                onClick = {
+                    fbDatabase.unsubscribeEvent(event)
+                    Toast.makeText(activity,"Inscrição removida com sucesso", Toast.LENGTH_SHORT).show()
+                },
+                dateEvent = event.data,
+                startTimeEvent = event.startTime ,
+                sizeRouteEvent = event.sizeRoute,
+                managerEvent = event.manager,
+                titleEvent = event.title,
+                addressEvent = event.address
+            )
             Spacer(modifier = Modifier.padding(15.dp))
         }
 
