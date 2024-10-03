@@ -20,11 +20,16 @@ class MainViewModel : ViewModelBase(), FBDatabase.Listener{
     val eventsSubscribed : List<Event>
         get() = _eventsSubscribed
 
+    private val _events = mutableStateListOf<Event>()
+    val events : List<Event>
+        get() = _events
+
     override fun onUserLoaded(user: User) {
         _user.value = user
     }
 
     override fun onEventsLoaded(events: List<Event>) {
+        _events.addAll(events)
         _eventsNear.addAll(events)
     }
 
@@ -35,6 +40,7 @@ class MainViewModel : ViewModelBase(), FBDatabase.Listener{
 
     override fun onEventCreated(event: Event) {
         _eventsNear.add(event)
+        _events.add(event)
     }
 
     override fun onEventUnsubscribed(event: Event) {
@@ -45,6 +51,8 @@ class MainViewModel : ViewModelBase(), FBDatabase.Listener{
     override fun onEventUpdated(event: Event) {
         _eventsNear.remove(event)
         _eventsNear.add(event)
+        _events.remove(event)
+        _events.add(event)
 
     }
 

@@ -52,7 +52,7 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
                 top = 10.dp, end = 10.dp
             )) {
             LocalizationTopBar(viewModel)
-            PhotoUser()
+//            PhotoUser()
         }
 
         Column(verticalArrangement = Arrangement.Top,
@@ -61,7 +61,11 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
 
         ) {
 
-            Text(text = "Próximos eventos perto de você", modifier = Modifier.padding(top = 30.dp))
+            Text(
+                text = "Eventos disponíveis para cadastro",
+                fontSize = 22.sp,
+                modifier = Modifier.padding(30.dp)
+                )
             ContentCardsHomePage(viewModel, fbDatabase)
         }
 

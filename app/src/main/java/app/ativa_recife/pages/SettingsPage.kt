@@ -25,12 +25,13 @@ import app.ativa_recife.utils.components.ButtonCustomComponent
 import app.ativa_recife.utils.components.PhotoUser
 import app.ativa_recife.ui.theme.Orange50
 import app.ativa_recife.ui.theme.configButton
+import app.ativa_recife.viewmodel.MainViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 
 @Composable
-fun SettingsPage(modifier: Modifier = Modifier) {
+fun SettingsPage(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     val activity = LocalContext.current as? Activity
 
     Column(
@@ -45,45 +46,6 @@ fun SettingsPage(modifier: Modifier = Modifier) {
             text = "Configurações",
             fontSize = 30.sp,
 
-        )
-        Spacer(modifier = Modifier.size(40.dp))
-        PhotoUser(size = 100.dp)
-
-        Spacer(modifier = Modifier.size(20.dp))
-        ButtonCustomComponent(
-            onClick = { Toast.makeText(activity, "Editando Perfil", Toast.LENGTH_SHORT).show() },
-            label = "Editar Perfil",
-            style = configButton,
-            modifier = Modifier
-                        .width(450.dp)
-                        .height(50.dp)
-                        .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-            borderRadius = 20,
-            color = Pink40
-        )
-        Spacer(modifier = Modifier.size(20.dp))
-        ButtonCustomComponent(
-            onClick = { Toast.makeText(activity, "Editando localização", Toast.LENGTH_SHORT).show() },
-            label = "Editar localização",
-            style = configButton,
-            modifier = Modifier
-                .width(450.dp)
-                .height(50.dp)
-                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-            borderRadius = 20,
-            color = Pink40
-        )
-        Spacer(modifier = Modifier.size(20.dp))
-        ButtonCustomComponent(
-            onClick = {},
-            label = "Criar uma Organização",
-            style = configButton,
-            modifier = Modifier
-                .width(450.dp)
-                .height(50.dp)
-                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-            borderRadius = 20,
-            color = Pink40
         )
         Spacer(modifier = Modifier.size(20.dp))
         ButtonCustomComponent(

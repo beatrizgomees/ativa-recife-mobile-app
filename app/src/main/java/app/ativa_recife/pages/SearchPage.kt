@@ -71,7 +71,7 @@ fun SearchPage(modifier: Modifier = Modifier,
         )
     }
 
-    var currentEvents = viewModel.eventsNear
+    var currentEvents = viewModel.events
     var search by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf("") }
     var filteredEvents by remember { mutableStateOf(currentEvents) }
@@ -127,13 +127,6 @@ fun SearchPage(modifier: Modifier = Modifier,
                             }
                         }) {
                             Icon(imageVector = Icons.Filled.Search, contentDescription = "Search icon")
-                        }
-                    },
-                    leadingIcon = {
-                        IconButton(onClick = {
-                            Toast.makeText(activity, "Abrindo os filtros", Toast.LENGTH_SHORT).show()
-                        }) {
-                            Icon(imageVector = Icons.Filled.List, contentDescription = "Filter icon")
                         }
                     },
                     colors = OutlinedTextFieldDefaults.colors(

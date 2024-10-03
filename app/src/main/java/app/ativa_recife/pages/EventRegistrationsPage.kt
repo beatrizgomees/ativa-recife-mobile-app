@@ -46,7 +46,7 @@ fun EventRegistrationPage(modifier: Modifier = Modifier, viewModel: MainViewMode
                     .align(Alignment.TopEnd) // Alinha o PhotoUser no canto superior esquerdo
 
             ) {
-                PhotoUser()
+//                PhotoUser()
             }
         }
 
@@ -57,10 +57,16 @@ fun EventRegistrationPage(modifier: Modifier = Modifier, viewModel: MainViewMode
         ) {
 
             Text(
-                text = "Suas Inscrições",
-                fontSize = 20.sp,
-            )
-            ContentCardsEventsRegistration(viewModel, fbDatabase)
+                text = "Suas inscrições",
+                fontSize = 30.sp,
+
+                )
+            if(viewModel.eventsSubscribed.isEmpty()) {
+                Text(text = "Nenhuma inscrição realizada", modifier = Modifier.padding(30.dp))
+            } else {
+                ContentCardsEventsRegistration(viewModel, fbDatabase)
+            }
+
         }
     }
 
@@ -76,6 +82,7 @@ private fun ContentCardsEventsRegistration(viewModel: MainViewModel, fbDatabase:
             .padding(top = 10.dp, start = 20.dp, end = 20.dp),
         verticalArrangement = Arrangement.Top
     ) {
+
 
         val list = viewModel.eventsSubscribed
 

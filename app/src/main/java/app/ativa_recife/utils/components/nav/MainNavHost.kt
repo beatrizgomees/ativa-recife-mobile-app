@@ -26,7 +26,7 @@ fun MainNavHost(navController: NavHostController, viewModel: MainViewModel, cont
             SearchPage(viewModel = viewModel, context = context)
         }
         composable(route = BottomNavItem.SettingsPage.route){
-            SettingsPage()
+            SettingsPage(viewModel = viewModel)
         }
     }
 }

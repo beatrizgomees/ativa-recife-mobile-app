@@ -183,6 +183,5 @@ fun PageTwo(
         ) {
             Marker(state = MarkerState(position = startingLocation))
         }
-        Text("Latitude: ${startingLocation.latitude}, Longitude: ${startingLocation.longitude}")
     }
 }
