@@ -65,7 +65,6 @@ fun HomePage(modifier: Modifier = Modifier, viewModel: MainViewModel, fbDatabase
             ContentCardsHomePage(viewModel, fbDatabase)
         }
 
-
     }
 
 

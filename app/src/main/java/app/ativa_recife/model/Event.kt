@@ -25,4 +25,7 @@ data class Event(
     override fun hashCode(): Int {
         return id.hashCode() // Usa apenas o 'id' no hashCode
     }
+
+
+
 }
